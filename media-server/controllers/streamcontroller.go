@@ -1,17 +1,18 @@
-package main
+package controllers
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
-	_ "github.com/lib/pq"
 	"io"
 	"net/http"
 	"os"
 	"strconv"
 	"strings"
+
+	"github.com/gin-gonic/gin"
+	_ "github.com/lib/pq"
 )
 
-func streamVideo(c *gin.Context) {
+func StreamVideo(c *gin.Context) {
 	// Extract the filename parameter from the URL
 	fileName := c.Param("filename")
 
