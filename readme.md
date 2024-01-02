@@ -12,6 +12,8 @@
   - [x] As a user I should be able to log into the app
   - [x] As a user I should be able to create an account
   - [x] There should be a feature to allow user to log in securely on the local network using JWT or OAuth
+  - [ ] Add functionality to show a toast when the user has signed up successfully and reroute the user back to sign in page
+  - [ ] Add proper validation on the sign up page
   - [ ] There should be a mechanism to refresh the JWT token using the user cookies if the IP address/ mac address is same
   - [ ] There should be a navbar with a profile icon clicking which opens a small tab in which there is settings and logout option
   - [ ] A responsive navbar should exist which has a few options for selection like categories, language etc

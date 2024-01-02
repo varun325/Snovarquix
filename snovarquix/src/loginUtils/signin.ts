@@ -1,4 +1,6 @@
 import { NavigateFunction } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import { DecodedToken } from "../types";
 export default function handleSignIn(
   event: React.FormEvent<HTMLFormElement>,
   navigate: NavigateFunction,
@@ -40,7 +42,10 @@ export default function handleSignIn(
       return response.json(); // or response.text() depending on the response content type
     })
     .then((data) => {
-      setUserData("", "", "");
+      const parsedToken: DecodedToken = jwtDecode(data.token);
+      const username = atob(parsedToken.username);
+      const email = atob(parsedToken.email);
+      setUserData(username, email, parsedToken.exp);
       navigate("/home");
       console.log("Success:", data);
     })

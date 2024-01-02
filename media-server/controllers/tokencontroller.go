@@ -1,11 +1,11 @@
 package controllers
 
 import (
+	"net/http"
 	"github.com/gin-gonic/gin"
 	"github.com/varun325/media-server/auth"
 	"github.com/varun325/media-server/database"
 	"github.com/varun325/media-server/models"
-	"net/http"
 )
 
 type TokenRequest struct {
@@ -24,7 +24,7 @@ func GenerateToken(context *gin.Context) {
 	// check if email exists and password is correct
 	record := database.Instance.Where("email = ?", request.Email).First(&user)
 	if record.Error != nil {
-		context.JSON(http.StatusInternalServerError, gin.H{"error": record.Error.Error()})
+		context.JSON(http.StatusUnauthorized, gin.H{"error": "username doesn't exist"})
 		context.Abort()
 		return
 	}
