@@ -28,3 +28,4 @@
   - [ ] Add unit tests for high code coverage
   - [ ] Show the server's web IP address and port number on the console as a clickable URL
   - [ ] Add the ability to use device name instead of local IP address to hit the client URL
+  - [ ] Add request forwarding using nginx or something to re-route all the requests from client machine to backend server through the react server, the client doesn't need to have direct access to backend URLs
