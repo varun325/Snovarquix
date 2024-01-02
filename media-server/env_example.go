@@ -1,11 +1,3 @@
 package main
 
-//rename this file to env.go and uncomment and fill the code below before running the server
-
-// const (
-// 	dbHost     = ""
-// 	dbPort     = ""
-// 	dbUser     = ""
-// 	dbPassword = ""
-// 	dbName     = ""
-// )
+// var connectionString = "<username>:<password>@tcp(localhost:3306)/<db_name>?parseTime=true"

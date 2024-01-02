@@ -2,32 +2,29 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
 	"github.com/gin-gonic/gin"
-	_ "github.com/lib/pq"
-	"log"
+	"github.com/varun325/media-server/controllers"
+	"github.com/varun325/media-server/database"
+	"github.com/varun325/media-server/middlewares"
 	"net/http"
 )
 
 var db *sql.DB
 
-func init() {
-	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", dbHost, dbPort, dbUser, dbPassword, dbName)
-	var err error
-	db, err = sql.Open("postgres", connStr)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = db.Ping()
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
 func main() {
+	database.Connect(connectionString)
+	database.Migrate()
 	// Create a new Gin router
 	router := gin.Default()
+	api := router.Group("/api")
+	{
+		api.POST("/token", controllers.GenerateToken)
+		api.POST("/user/register", controllers.RegisterUser)
+		secured := api.Group("/secured").Use(middlewares.Auth())
+		{
+			secured.GET("/ping", controllers.Ping)
+		}
+	}
 	// Define a simple welcome message at the root path
 	router.GET("/", func(c *gin.Context) {
 		c.String(http.StatusOK, "Welcome to the media server")
