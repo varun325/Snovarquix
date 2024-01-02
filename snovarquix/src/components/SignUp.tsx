@@ -39,6 +39,26 @@ export default function SignUp(
           margin="normal"
           required
           fullWidth
+          id="firstname"
+          label="First Name"
+          name="firstname"
+          autoComplete="firstname"
+          autoFocus
+        />
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="lastname"
+          label="Last Name"
+          name="lastname"
+          autoComplete="lastname"
+          autoFocus
+        />
+        <TextField
+          margin="normal"
+          required
+          fullWidth
           id="email"
           label="Email Address"
           name="email"

@@ -2,56 +2,28 @@ import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import { useNavigate } from "react-router-dom";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import handleSignIn from "../loginUtils/signin";
+import { useNavigate } from "react-router-dom";
+import handleSignUp from "../loginUtils/signup";
+import { useDispatch } from "react-redux";
+import { setProfile } from "../store/reducers/profile";
 
 export default function LoginPage() {
+  const dispatch = useDispatch();
+  const setUserData = (username: string, email: string, exp: string) => {
+    dispatch(setProfile({ username: username, email: email, exp: exp }));
+  };
   const [signUp, setSignUp] = React.useState(false);
   const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const apiUrl = "http://localhost:8080/api/token";
-
-    // Create the data to be sent in the request body
-    const postData = {
-      email: data.get("email"),
-      password: data.get("password"),
-    };
-
-    // Convert the data to a JSON string
-    const jsonBody = JSON.stringify(postData);
-
-    // Set the content type header
-    const headers = new Headers({
-      "Content-Type": "application/json",
-    });
-
-    // Define the fetch options
-    const requestOptions = {
-      method: "POST",
-      headers: headers,
-      body: jsonBody,
-    };
-
-    // Make the POST request using the Fetch API
-    fetch(apiUrl, requestOptions)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json(); // or response.text() depending on the response content type
-      })
-      .then((data) => {
-        navigate("/home");
-        console.log("Success:", data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    if (signUp) {
+      handleSignUp(event, navigate);
+    } else {
+      handleSignIn(event, navigate, setUserData);
+    }
   };
-
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <CssBaseline />
