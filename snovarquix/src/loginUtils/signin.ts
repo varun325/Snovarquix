@@ -1,6 +1,7 @@
 import { NavigateFunction } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { DecodedToken } from "../types";
+import { ENVIRONTMENT } from "../environments/environment";
 export default function handleSignIn(
   event: React.FormEvent<HTMLFormElement>,
   navigate: NavigateFunction,
@@ -8,7 +9,7 @@ export default function handleSignIn(
 ) {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
-  const apiUrl = "http://localhost:8080/api/token";
+  const apiUrl = `${ENVIRONTMENT.auth_url}/token`;
 
   // Create the data to be sent in the request body
   const encryptedEmail = btoa(data.get("email") as string);

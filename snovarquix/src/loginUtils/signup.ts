@@ -1,11 +1,12 @@
 import { NavigateFunction } from "react-router-dom";
+import { ENVIRONTMENT } from "../environments/environment";
 export default function handleSignUp(
   event: React.FormEvent<HTMLFormElement>,
   navigate: NavigateFunction
 ) {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
-  const apiUrl = "http://localhost:8080/api/user/register";
+  const apiUrl = `${ENVIRONTMENT.auth_url}/user/register`;
 
   // Create the data to be sent in the request body
   const encryptedEmail = btoa(data.get("email") as string);
