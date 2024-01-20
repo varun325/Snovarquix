@@ -10,11 +10,12 @@ export function LoginPage() {
         <img
           className="object-cover h-full w-full"
           height="1000"
-          src="/placeholder.svg"
+          src="https://source.unsplash.com/random?wallpapers"
           style={{
             aspectRatio: "1000/1000",
             objectFit: "cover",
           }}
+          alt="splash wallpaper"
           width="1000"
         />
       </div>
