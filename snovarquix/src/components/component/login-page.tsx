@@ -1,9 +1,13 @@
+'use client'
+
 import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 export function LoginPage() {
+  const router = useRouter();
   return (
     <div className="w-full h-screen flex items-stretch bg-gray-100 dark:bg-gray-900">
       <div className="flex-1 h-full">
@@ -40,7 +44,7 @@ export function LoginPage() {
                     <span>Remember me</span>
                   </label>
                 </div>
-                <Button className="w-full" type="submit">
+                <Button className="w-full" type="submit" onClick={()=>{router.push('/home')}}>
                   Sign In
                 </Button>
                 <Link className="text-sm text-blue-500 hover:underline" href="#">
