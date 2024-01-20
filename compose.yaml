@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+      MYSQL_DATABASE: jwt_demo
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    command: ["--skip-networking=0", "--bind-address=0.0.0.0"]  # Allow MySQL to listen on all interfaces
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost --silent"]
+      start_period: 40s
+      interval: 5s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - mysql_data:/var/lib/mysql
+    init: true
+
+  backend:
+    build:
+      context: ./media-server
+      target: final
+    ports:
+      - 8080:8080
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      - DB_CONNECTION_STRING=user:pass@tcp(mysql:3306)/jwt_demo?parseTime=true
+    command: ["sh", "-c", "go run ."]
+
+#  frontend:
+#    build:
+#      context: .
+#    environment:
+#      NODE_ENV: production
+#    ports:
+#      - 3000:3000
+
+volumes:
+  mysql_data:
+
