@@ -24,7 +24,7 @@
   - [ ] As a user I should be able to see different series grouped together based on seasons and episodes
   - [ ] As a user I should be able to create a collection locally where I can create series using name, add seasons and select episodes for each season if needed
   - [ ] There should be a feature where the app tries to arrange episodes itself by default but the order can be rearranged if needed by the user using drag and drop
-  - [ ] use docker to containerise the whole project
+  - [x] use docker to containerise the whole project
   - [x] use MYSQL server or local file system operations to maintain local data for the system
   - [ ] Add git actions for verifying commits
   - [ ] Add unit tests for high code coverage
